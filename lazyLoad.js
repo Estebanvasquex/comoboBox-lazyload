@@ -19,6 +19,7 @@ var results = []
 $.fn.select2.amd.require(["select2/data/array", "select2/utils"],
 	function (ArrayData, Utils) {
 		function CustomData($element, options) {
+			console.log($element);
 			CustomData.__super__.constructor.call(this, $element, options)
 		}
 		//Función utilizada para buscar registros, realiza la busqueda por cada letra escrita
@@ -63,9 +64,7 @@ $.fn.select2.amd.require(["select2/data/array", "select2/utils"],
 		}
 		//Implemetación de los datos en el select
 		$("#select").select2({
-			placeholder: 'Seleccionar una opción',
-			ajax:{},
-			allowClear: true,
+			placeholder: 'Seleccione',
 			dataAdapter:CustomData
 		})
 	}
