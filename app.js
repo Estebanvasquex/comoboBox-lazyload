@@ -13,3 +13,6 @@ class helloWord extends HTMLElement{
 }
 
 
+var idSelect = $('#miSelect').attr('id');
+console.log(idSelect);
+

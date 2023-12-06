@@ -1,3 +1,4 @@
+
 import {datos} from './datos.js';
 
 
@@ -12,22 +13,29 @@ $(document).ready(function() {
 });
 
 
-var resultSearch = [] // Array para guardar la busqueda en tiempo real
-var results = []
 
 //Carga de métodos incluidos en select2
-$.fn.select2.amd.require(["select2/data/array", "select2/utils"],
+function cargarDatosSelect2(datos = [], idSelect, id = "id", text = "text", pageSize_ = 100, placeholder = "Buscar...") {
+	if(!datos || !idSelect || !id || !text) return;
+	if(!document.getElementById(idSelect?.replace("#", ""))) return;
+
+	var datos_finales = datos.map(function (item, index) {
+		if(!item[id] || !item[text]) return { remove: true };
+		return { id: item[id], text: item[text] };
+	}).filter((item) => !item.remove);
+
+	var resultSearch = [] // Array para guardar la busqueda en tiempo real
+	var results = []
+
+	$.fn.select2.amd.require(["select2/data/array", "select2/utils"],
 	function (ArrayData, Utils) {
 		function CustomData($element, options) {
-			console.log($element);
 			CustomData.__super__.constructor.call(this, $element, options)
 		}
 		//Función utilizada para buscar registros, realiza la busqueda por cada letra escrita
 		function matchStart(params, data) {
-            //console.log(params);
 			var filteredChildren = [];
 			$.each(data, function (idx, child) {
-                //child.text = child.text.toUpperCase()
 				if (child.text.indexOf(params.toUpperCase()) > -1) {       
 					filteredChildren.push(child)
 				}
@@ -43,7 +51,8 @@ $.fn.select2.amd.require(["select2/data/array", "select2/utils"],
 			if (!("page" in params)) {
 				params.page = 1
 			}
-			var pageSize = 100 //Cantidad de registros a cargar al cargar por primera vez y al hacer scroll en el dropdown
+
+			var pageSize = pageSize_; //Cantidad de registros a cargar al cargar por primera vez y al hacer scroll en el dropdown
 
 			if (typeof params.term !== 'undefined') {
 				matchStart(params.term, datos_finales)
@@ -51,7 +60,6 @@ $.fn.select2.amd.require(["select2/data/array", "select2/utils"],
 			
 			//crea array con la paginacion especificada
 			resultSearch.length > 0 ? results = resultSearch : results = datos_finales
-			console.log(results);
             callback({
                 
 				results:results.slice((params.page - 1) * pageSize, params.page * pageSize),
@@ -63,9 +71,15 @@ $.fn.select2.amd.require(["select2/data/array", "select2/utils"],
 			})
 		}
 		//Implemetación de los datos en el select
-		$("#select").select2({
-			placeholder: 'Seleccione',
+		$(idSelect).select2({
+			placeholder,
 			dataAdapter:CustomData
 		})
 	}
 )
+
+
+cargarDatosSelect2(datos, '#select', "id", "text", 10, "placeholder");
+
+//pasarle el id del select
+//pasar el array de datos

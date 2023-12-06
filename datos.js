@@ -152686,35 +152686,35 @@ export let datos = [
         "descripcion": ""
     },
     {
-        "codigo_predio": 273284,
+        "codigo_predio": null,
         "codigo_ficha": "ISA023564",
         "codigo_municipio": 876,
         "CODIGO_DEPTO": "068",
         "descripcion": ""
     },
     {
-        "codigo_predio": 273285,
+        "codigo_predio": null,
         "codigo_ficha": "ISA023565",
         "codigo_municipio": 876,
         "CODIGO_DEPTO": "068",
         "descripcion": ""
     },
     {
-        "codigo_predio": 273286,
+        "codigo_predio": "",
         "codigo_ficha": "ISA023566",
         "codigo_municipio": 876,
         "CODIGO_DEPTO": "068",
         "descripcion": ""
     },
     {
-        "codigo_predio": 273287,
+        "codigo_predio": null,
         "codigo_ficha": "ISA023567",
         "codigo_municipio": 876,
         "CODIGO_DEPTO": "068",
         "descripcion": ""
     },
     {
-        "codigo_predio": 273288,
+        "codigo_predio": null,
         "codigo_ficha": "ISA023568",
         "codigo_municipio": 876,
         "CODIGO_DEPTO": "068",
